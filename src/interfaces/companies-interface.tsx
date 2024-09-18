@@ -27,3 +27,12 @@ export interface CompanyInfoWidgetProps {
 }
 
 export interface Companies extends Array<Company> {}
+
+export interface MosaicContentProps {
+  id: string;
+  path: any;
+  companies: Company[] | null;
+  selectedCompanies: { [key: string]: Company | null };
+  setSelectedCompanies: (companies: (prev: any) => any) => void;
+  nextIndex: number;
+}
