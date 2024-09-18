@@ -9,7 +9,7 @@ interface ActionButtonsProps {
 
 const ActionButtons: React.FC<ActionButtonsProps> = ({ onAutoArrange, onAddToTopRight }) => {
   return (
-    <div className={classNames(Classes.NAVBAR, Classes.DARK)}>
+    <header className={classNames(Classes.NAVBAR, Classes.DARK)}>
       <div className={classNames(Classes.NAVBAR_GROUP, Classes.BUTTON_GROUP)}>
         <div className="navbar-separator" />
         <span className="actions-label">Actions:</span>&nbsp;
@@ -20,7 +20,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({ onAutoArrange, onAddToTop
           Add Window to Top Right
         </Button>
       </div>
-    </div>
+    </header>
   );
 };
 

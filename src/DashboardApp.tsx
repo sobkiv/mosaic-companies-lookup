@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   Mosaic,
   MosaicNode,
@@ -11,32 +11,36 @@ import {
   Corner,
   MosaicParent,
   MosaicDirection,
-} from 'react-mosaic-component';
-import 'react-mosaic-component/react-mosaic-component.css';
-import '@blueprintjs/core/lib/css/blueprint.css';
-import '@blueprintjs/icons/lib/css/blueprint-icons.css';
-import { Companies, Company } from './interfaces/companies-interface';
-import { filterCompanyData } from './utils/filter-company-data';
-import ActionButtons from './components/ActionButtons';
-import MosaicContent from './components/MosaicContent';
+} from "react-mosaic-component";
+import "react-mosaic-component/react-mosaic-component.css";
+import "@blueprintjs/core/lib/css/blueprint.css";
+import "@blueprintjs/icons/lib/css/blueprint-icons.css";
+import { Companies, Company } from "./interfaces/companies-interface";
+import { filterCompanyData } from "./utils/filter-company-data";
+import ActionButtons from "./components/ActionButtons";
+import MosaicContent from "./components/MosaicContent";
 
 const initializeNode = (): MosaicNode<string> => ({
-  direction: 'row',
-  first: '0',
+  direction: "row",
+  first: "0",
   second: {
-    direction: 'column',
-    first: '1',
-    second: '2',
+    direction: "column",
+    first: "1",
+    second: "2",
   },
   splitPercentage: 50,
 });
 
 const Dashboard: React.FC = () => {
   const [companies, setCompaniesInfo] = useState<Companies | null>(null);
-  const [currentNode, setCurrentNode] = useState<MosaicNode<string> | null>(initializeNode());
+  const [currentNode, setCurrentNode] = useState<MosaicNode<string> | null>(
+    initializeNode(),
+  );
   const [loading, setLoading] = useState(true);
   const [nextIndex, setNextIndex] = useState<number>(3);
-  const [selectedCompanies, setSelectedCompanies] = useState<{ [key: string]: Company | null }>({});
+  const [selectedCompanies, setSelectedCompanies] = useState<{
+    [key: string]: Company | null;
+  }>({});
 
   useEffect(() => {
     fetchCompanies();
@@ -44,16 +48,16 @@ const Dashboard: React.FC = () => {
 
   const fetchCompanies = async () => {
     try {
-      const response = await fetch('http://localhost:3001/companies');
+      const response = await fetch("http://localhost:3001/companies");
       if (response.ok) {
         const data = await response.json();
         const filteredData = filterCompanyData(data);
         setCompaniesInfo(filteredData);
       } else {
-        console.error('Error fetching data:', response.statusText);
+        console.error("Error fetching data:", response.statusText);
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     } finally {
       setLoading(false);
     }
@@ -70,12 +74,20 @@ const Dashboard: React.FC = () => {
     if (currentNode) {
       let updatedNode = currentNode;
       const path = getPathToCorner(updatedNode, Corner.TOP_RIGHT);
-      const parent = getNodeAtPath(updatedNode, path.slice(0, -1)) as MosaicParent<string>;
-      const destination = getNodeAtPath(updatedNode, path) as MosaicNode<string>;
-      const direction: MosaicDirection = parent ? getOtherDirection(parent.direction) : 'row';
+      const parent = getNodeAtPath(
+        updatedNode,
+        path.slice(0, -1),
+      ) as MosaicParent<string>;
+      const destination = getNodeAtPath(
+        updatedNode,
+        path,
+      ) as MosaicNode<string>;
+      const direction: MosaicDirection = parent
+        ? getOtherDirection(parent.direction)
+        : "row";
 
-      const first = direction === 'row' ? destination : nextIndex.toString();
-      const second = direction === 'row' ? nextIndex.toString() : destination;
+      const first = direction === "row" ? destination : nextIndex.toString();
+      const second = direction === "row" ? nextIndex.toString() : destination;
 
       updatedNode = updateTree(updatedNode, [
         {
@@ -98,23 +110,28 @@ const Dashboard: React.FC = () => {
   if (loading) return <div>Loading...</div>;
 
   return (
-      <div className="h-screen">
-        <ActionButtons onAutoArrange={autoArrange} onAddToTopRight={addToTopRight} />
+    <>
+      <ActionButtons
+        onAutoArrange={autoArrange}
+        onAddToTopRight={addToTopRight}
+      />
+      <main className="h-screen">
         <Mosaic<string>
-            renderTile={(id, path) => (
-                <MosaicContent
-                    id={id}
-                    path={path}
-                    companies={companies}
-                    selectedCompanies={selectedCompanies}
-                    setSelectedCompanies={setSelectedCompanies}
-                    nextIndex={nextIndex}
-                />
-            )}
-            value={currentNode}
-            onChange={setCurrentNode}
+          renderTile={(id, path) => (
+            <MosaicContent
+              id={id}
+              path={path}
+              companies={companies}
+              selectedCompanies={selectedCompanies}
+              setSelectedCompanies={setSelectedCompanies}
+              nextIndex={nextIndex}
+            />
+          )}
+          value={currentNode}
+          onChange={setCurrentNode}
         />
-      </div>
+      </main>
+    </>
   );
 };
 
