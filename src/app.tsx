@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Mosaic, MosaicNode } from 'react-mosaic-component';
+import { MosaicNode } from 'react-mosaic-component';
 import 'react-mosaic-component/react-mosaic-component.css';
 import '@blueprintjs/core/lib/css/blueprint.css';
 import '@blueprintjs/icons/lib/css/blueprint-icons.css';
 import { Companies, Company } from './interfaces/companies-interface';
 import { filterCompanyData } from './utils/filter-company-data';
-import MosaicContent from './components/mosaic-content/mosaic-content';
 import Header from './components/header/header';
+import Dashboard from './components/dashboard';
 
 const initializeNode = (): MosaicNode<string> => ({
   direction: 'row',
@@ -19,7 +19,7 @@ const initializeNode = (): MosaicNode<string> => ({
   splitPercentage: 50,
 });
 
-const Dashboard = () => {
+const App = () => {
   const [companies, setCompaniesInfo] = useState<Companies | null>(null);
   const [currentNode, setCurrentNode] = useState<MosaicNode<string> | null>(initializeNode());
   const [nextIndex, setNextIndex] = useState<number>(3);
@@ -54,24 +54,16 @@ const Dashboard = () => {
         nextIndex={nextIndex}
         setNextIndex={setNextIndex}
       />
-      <main className="h-screen">
-        <Mosaic<string>
-          renderTile={(id, path) => (
-            <MosaicContent
-              id={id}
-              path={path}
-              companies={companies}
-              selectedCompanies={selectedCompanies}
-              setSelectedCompanies={setSelectedCompanies}
-              nextIndex={nextIndex}
-            />
-          )}
-          value={currentNode}
-          onChange={setCurrentNode}
-        />
-      </main>
+      <Dashboard
+        companies={companies}
+        nextIndex={nextIndex}
+        selectedCompanies={selectedCompanies}
+        currentNode={currentNode}
+        setCurrentNode={setCurrentNode}
+        setSelectedCompanies={setSelectedCompanies}
+      />
     </>
   );
 };
 
-export default Dashboard;
+export default App;

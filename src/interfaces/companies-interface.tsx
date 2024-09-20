@@ -25,11 +25,21 @@ export interface Company {
   legacy_industry_group: string;
 }
 
+export type Companies = Company[];
+
+interface MosaicNodeProps {
+  currentNode: MosaicNode<string> | null;
+  setCurrentNode: React.Dispatch<React.SetStateAction<MosaicNode<string> | null>>;
+}
+
+interface NextIndexProps {
+  nextIndex: number;
+  setNextIndex: React.Dispatch<React.SetStateAction<number>>;
+}
+
 export interface CompanyInfoWidgetProps {
   company: Company;
 }
-
-export interface Companies extends Array<Company> {}
 
 export interface MosaicContentProps {
   id: string;
@@ -40,21 +50,21 @@ export interface MosaicContentProps {
   nextIndex: number;
 }
 
-export interface HeaderProps {
-  currentNode: MosaicNode<string> | null;
-  setCurrentNode: React.Dispatch<React.SetStateAction<MosaicNode<string> | null>>;
+export interface HeaderProps extends MosaicNodeProps, NextIndexProps {}
+
+export interface AutoArrangeButtonProps extends MosaicNodeProps {}
+
+export interface AddWindowButtonProps extends MosaicNodeProps, NextIndexProps {}
+
+export interface DashboardProps extends MosaicNodeProps {
+  setSelectedCompanies: React.Dispatch<React.SetStateAction<{ [key: string]: Company | null }>>;
+  selectedCompanies: { [key: string]: Company | null };
+  companies: Companies | null;
   nextIndex: number;
-  setNextIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export interface AutoArrangeButtonProps {
-  currentNode: MosaicNode<string> | null;
-  setCurrentNode: React.Dispatch<React.SetStateAction<MosaicNode<string> | null>>;
-}
-
-export interface AddWindowButtonProps {
-  currentNode: MosaicNode<string> | null;
-  setCurrentNode: React.Dispatch<React.SetStateAction<MosaicNode<string> | null>>;
-  nextIndex: number;
-  setNextIndex: React.Dispatch<React.SetStateAction<number>>;
+export interface CompanySelectProps {
+  companies: Company[];
+  selectedCompany: Company | null;
+  onCompanySelect: (company: Company) => void;
 }

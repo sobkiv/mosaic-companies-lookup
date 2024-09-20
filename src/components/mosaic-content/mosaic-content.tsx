@@ -18,16 +18,14 @@ const MosaicContent: React.FC<MosaicContentProps> = ({
 
   return (
     <MosaicWindow path={path} title="Company Info">
-      <div>
-        {companies && (
-          <CompaniesDropdown
-            companies={companies}
-            selectedCompany={selectedCompanies[id] || companies[parseInt(id) || nextIndex]}
-            onCompanySelect={handleCompanySelect}
-          />
-        )}
-        <CompanyInfo company={selectedCompanies[id] || (companies ? companies[parseInt(id)] : ({} as Company))} />
-      </div>
+      {companies && (
+        <CompaniesDropdown
+          companies={companies}
+          selectedCompany={selectedCompanies[id] || companies[parseInt(id) || nextIndex]}
+          onCompanySelect={handleCompanySelect}
+        />
+      )}
+      <CompanyInfo company={selectedCompanies[id] || (companies ? companies[parseInt(id)] : ({} as Company))} />
     </MosaicWindow>
   );
 };

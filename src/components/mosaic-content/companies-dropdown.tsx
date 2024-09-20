@@ -1,13 +1,7 @@
 import React from 'react';
 import { Select } from '@blueprintjs/select';
 import { MenuItem, Button } from '@blueprintjs/core';
-import { Company } from '../../interfaces/companies-interface';
-
-interface CompanySelectProps {
-  companies: Company[];
-  selectedCompany: Company | null;
-  onCompanySelect: (company: Company) => void;
-}
+import { Company, CompanySelectProps } from '../../interfaces/companies-interface';
 
 const CompaniesDropdown: React.FC<CompanySelectProps> = ({ companies, selectedCompany, onCompanySelect }) => {
   const CompanySelectComponent = Select.ofType<Company>();
