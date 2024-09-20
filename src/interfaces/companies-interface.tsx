@@ -1,3 +1,6 @@
+import { MosaicNode } from 'react-mosaic-component';
+import React from 'react';
+
 export interface Company {
   name: string;
   ticker: string;
@@ -35,4 +38,23 @@ export interface MosaicContentProps {
   selectedCompanies: { [key: string]: Company | null };
   setSelectedCompanies: (companies: (prev: any) => any) => void;
   nextIndex: number;
+}
+
+export interface HeaderProps {
+  currentNode: MosaicNode<string> | null;
+  setCurrentNode: React.Dispatch<React.SetStateAction<MosaicNode<string> | null>>;
+  nextIndex: number;
+  setNextIndex: React.Dispatch<React.SetStateAction<number>>;
+}
+
+export interface AutoArrangeButtonProps {
+  currentNode: MosaicNode<string> | null;
+  setCurrentNode: React.Dispatch<React.SetStateAction<MosaicNode<string> | null>>;
+}
+
+export interface AddWindowButtonProps {
+  currentNode: MosaicNode<string> | null;
+  setCurrentNode: React.Dispatch<React.SetStateAction<MosaicNode<string> | null>>;
+  nextIndex: number;
+  setNextIndex: React.Dispatch<React.SetStateAction<number>>;
 }

@@ -1,8 +1,8 @@
 import React from 'react';
-import { processNames } from '../utils/process-names';
-import { CompanyInfoWidgetProps } from '../interfaces/companies-interface';
+import { processNames } from '../../utils/process-names';
+import { CompanyInfoWidgetProps } from '../../interfaces/companies-interface';
 
-const CompanyInfoWidget: React.FC<CompanyInfoWidgetProps> = ({ company }) => {
+const CompanyInfo: React.FC<CompanyInfoWidgetProps> = ({ company }) => {
   if (!company) {
     return <div>Loading...</div>;
   }
@@ -18,4 +18,4 @@ const CompanyInfoWidget: React.FC<CompanyInfoWidgetProps> = ({ company }) => {
   );
 };
 
-export default CompanyInfoWidget;
+export default CompanyInfo;

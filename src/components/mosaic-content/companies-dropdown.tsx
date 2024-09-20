@@ -1,7 +1,7 @@
 import React from 'react';
 import { Select } from '@blueprintjs/select';
 import { MenuItem, Button } from '@blueprintjs/core';
-import { Company } from '../interfaces/companies-interface';
+import { Company } from '../../interfaces/companies-interface';
 
 interface CompanySelectProps {
   companies: Company[];
@@ -9,7 +9,7 @@ interface CompanySelectProps {
   onCompanySelect: (company: Company) => void;
 }
 
-const CompanyDropdown: React.FC<CompanySelectProps> = ({ companies, selectedCompany, onCompanySelect }) => {
+const CompaniesDropdown: React.FC<CompanySelectProps> = ({ companies, selectedCompany, onCompanySelect }) => {
   const CompanySelectComponent = Select.ofType<Company>();
 
   return (
@@ -26,4 +26,4 @@ const CompanyDropdown: React.FC<CompanySelectProps> = ({ companies, selectedComp
   );
 };
 
-export default CompanyDropdown;
+export default CompaniesDropdown;

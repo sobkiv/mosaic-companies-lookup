@@ -1,8 +1,8 @@
 import React from 'react';
 import { MosaicWindow } from 'react-mosaic-component';
-import CompanyDropdown from './CompanyDropdown';
-import CompanyInfoWidget from './CompanyInfoWidget';
-import { Company, MosaicContentProps } from '../interfaces/companies-interface';
+import CompaniesDropdown from './companies-dropdown';
+import CompanyInfo from './company-info';
+import { Company, MosaicContentProps } from '../../interfaces/companies-interface';
 
 const MosaicContent: React.FC<MosaicContentProps> = ({
   id,
@@ -20,13 +20,13 @@ const MosaicContent: React.FC<MosaicContentProps> = ({
     <MosaicWindow path={path} title="Company Info">
       <div>
         {companies && (
-          <CompanyDropdown
+          <CompaniesDropdown
             companies={companies}
             selectedCompany={selectedCompanies[id] || companies[parseInt(id) || nextIndex]}
             onCompanySelect={handleCompanySelect}
           />
         )}
-        <CompanyInfoWidget company={selectedCompanies[id] || (companies ? companies[parseInt(id)] : ({} as Company))} />
+        <CompanyInfo company={selectedCompanies[id] || (companies ? companies[parseInt(id)] : ({} as Company))} />
       </div>
     </MosaicWindow>
   );
