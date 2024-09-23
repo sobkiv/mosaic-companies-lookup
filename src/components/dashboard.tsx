@@ -10,6 +10,7 @@ const Dashboard: React.FC<DashboardProps> = ({
   selectedCompanies,
   currentNode,
   setCurrentNode,
+  isLoading,
 }) => {
   return (
     <main className="h-screen">
@@ -22,6 +23,7 @@ const Dashboard: React.FC<DashboardProps> = ({
             selectedCompanies={selectedCompanies}
             setSelectedCompanies={setSelectedCompanies}
             nextIndex={nextIndex}
+            isLoading={isLoading}
           />
         )}
         value={currentNode}

@@ -11,6 +11,7 @@ const MosaicContent: React.FC<MosaicContentProps> = ({
   selectedCompanies,
   setSelectedCompanies,
   nextIndex,
+  isLoading,
 }) => {
   const handleCompanySelect = (company: Company) => {
     setSelectedCompanies((prev) => ({ ...prev, [id]: company }));
@@ -25,7 +26,10 @@ const MosaicContent: React.FC<MosaicContentProps> = ({
           onCompanySelect={handleCompanySelect}
         />
       )}
-      <CompanyInfo company={selectedCompanies[id] || (companies ? companies[parseInt(id)] : ({} as Company))} />
+      <CompanyInfo
+        company={selectedCompanies[id] || (companies ? companies[parseInt(id)] : null)}
+        isLoading={isLoading}
+      />
     </MosaicWindow>
   );
 };

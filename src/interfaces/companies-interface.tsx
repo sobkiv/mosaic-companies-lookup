@@ -38,7 +38,8 @@ interface NextIndexProps {
 }
 
 export interface CompanyInfoWidgetProps {
-  company: Company;
+  company: Company | null;
+  isLoading: boolean;
 }
 
 export interface MosaicContentProps {
@@ -48,6 +49,7 @@ export interface MosaicContentProps {
   selectedCompanies: { [key: string]: Company | null };
   setSelectedCompanies: (companies: (prev: any) => any) => void;
   nextIndex: number;
+  isLoading: boolean;
 }
 
 export interface HeaderProps extends MosaicNodeProps, NextIndexProps {}
@@ -61,6 +63,7 @@ export interface DashboardProps extends MosaicNodeProps {
   selectedCompanies: { [key: string]: Company | null };
   companies: Companies | null;
   nextIndex: number;
+  isLoading: boolean;
 }
 
 export interface CompanySelectProps {
